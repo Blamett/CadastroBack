@@ -5,17 +5,17 @@ export type UserDocument = UserEntity & Document;
 
 @Schema()
 export class UserEntity {
-  @Prop()
+  @Prop({type: String, required: true})
   nome: string;
 
-  @Prop()
+  @Prop({type: String, required: true})
   sexo: string;
 
-  @Prop()
+  @Prop({type: String, required: true})
   dataDeNascimento: string;
 
-  @Prop()
+  @Prop({type: String, required: true})
   estadoCivil: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(UserEntity);
+export const UserSchema = SchemaFactory.createForClass(UserEntity); 
