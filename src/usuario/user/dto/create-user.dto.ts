@@ -1,20 +1,40 @@
-import { IsEmail, IsNotEmpty, IsNotIn, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, ValidateNested } from "class-validator";
+
+class Endereco {
+
+    @IsNotEmpty()
+    cep: string;
+
+    @IsNotEmpty()
+    endereco: string;
+
+    @IsNotEmpty()
+    numero: string;
+
+    @IsNotEmpty()
+    complemento: string;
+
+    @IsNotEmpty()
+    cidade: string;
+
+    @IsNotEmpty()
+    estado: string;
+}
 
 export class CreateUserDto {
 
-    @IsString()
     @IsNotEmpty()
     nome: string;
-  
+
     @IsNotEmpty()
-    @IsString()
     sexo: string;
-  
+
     @IsNotEmpty()
-    @IsString()
     dataDeNascimento: string;
 
     @IsNotEmpty()
-    @IsString()
     estadoCivil: string
+
+    @ValidateNested()
+    Endereco: Endereco;
 }
