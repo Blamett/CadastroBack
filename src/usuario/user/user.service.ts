@@ -6,15 +6,26 @@ import { UserEntity, UserDocument } from './schemas/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(UserEntity.name) private UserModel: Model<UserDocument>) {}
+    constructor(@InjectModel(UserEntity.name) private UserModel: Model<UserDocument>) { }
 
-  async create(CreateUserDto: CreateUserDto): Promise<UserEntity> {
-    const createdUser = new this.UserModel(CreateUserDto);
-    return createdUser.save();
-  }
+    async create(CreateUserDto: CreateUserDto): Promise<UserEntity> {
+        const createdUser = new this.UserModel(CreateUserDto);
+        return createdUser.save();
+    }
 
-  async findAll(): Promise<UserEntity[]> {
-    return this.UserModel.find().exec();
-  }
+    async update(id: string, CreateUserDto: CreateUserDto): Promise<UserEntity> {
+        return this.UserModel.findByIdAndUpdate(id, CreateUserDto);
+    }
 
+    async findAll(): Promise<UserEntity[]> {
+        return this.UserModel.find().exec();
+    }
+
+    async findbyId(id: string): Promise<UserEntity[]> {
+        return this.UserModel.findById(id);
+    }
+
+    async delete(id: string) {
+        return this.UserModel.findByIdAndDelete(id);
+    }
 }

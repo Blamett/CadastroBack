@@ -4,16 +4,38 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) { }
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+    @Post()
+    create(@Body() CreateUserDto: CreateUserDto) {
+        const dn = CreateUserDto.dataDeNascimento;
+        this.userService.create(CreateUserDto);
+        const dataNascimento = new Date(dn);
+        const dataHoje = new Date();
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
+        return {
+            'aniversario': dataHoje.getDate() == dataNascimento.getDate() && dataHoje.getMonth() == dataNascimento.getMonth()
+        };
 
+    }
+
+    @Get()
+    findAll() {
+        return this.userService.findAll();
+    }
+
+    @Get(':id')
+    findbyId(@Param('id') id: string) {
+        return this.userService.findbyId(id);
+    }
+
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() CreateUserDto: CreateUserDto) {
+        this.userService.update(id, CreateUserDto);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id: string) {
+        this.userService.delete(id);
+    }
 }

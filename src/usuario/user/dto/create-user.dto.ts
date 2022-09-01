@@ -30,7 +30,7 @@ export class CreateUserDto {
     sexo: string;
 
     @IsNotEmpty()
-    dataDeNascimento: string;
+    dataDeNascimento: Date;
 
     @IsNotEmpty()
     estadoCivil: string
