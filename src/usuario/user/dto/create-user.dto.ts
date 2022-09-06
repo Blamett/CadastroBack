@@ -3,6 +3,9 @@ import { IsNotEmpty, ValidateNested } from "class-validator";
 class Endereco {
 
     @IsNotEmpty()
+    apelido: string;
+
+    @IsNotEmpty()
     cep: string;
 
     @IsNotEmpty()
@@ -33,7 +36,7 @@ export class CreateUserDto {
     dataDeNascimento: Date;
 
     @IsNotEmpty()
-    estadoCivil: string
+    estadoCivil: string;
 
     @ValidateNested()
     Endereco: Endereco;

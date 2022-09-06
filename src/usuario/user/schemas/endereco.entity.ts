@@ -5,6 +5,9 @@ import { Document } from 'mongoose';
 export class EnderecoEntity {
 
     @Prop({ type: String, required: true })
+    apelido: string;
+
+    @Prop({ type: String, required: true })
     cep: string;
 
     @Prop({ type: String, required: true })
