@@ -7,9 +7,10 @@ export class UserController {
     constructor(private readonly userService: UserService) { }
 
     @Post()
-    create(@Body() CreateUserDto: CreateUserDto) {
-        const dn = CreateUserDto.dataDeNascimento;
-        this.userService.create(CreateUserDto);
+    create(@Body() createUserDto: CreateUserDto) {
+
+        const dn = createUserDto.dataDeNascimento;
+        this.userService.create(createUserDto);
         const dataNascimento = new Date(dn);
         const dataHoje = new Date();
 

@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { plainToInstance } from 'class-transformer';
+import { validate } from 'class-validator';
+import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserEntity, UserDocument } from './schemas/user.entity';
+import { UserDocument, UserEntity } from './schemas/user.entity';
 
 @Injectable()
 export class UserService {
     constructor(@InjectModel(UserEntity.name) private UserModel: Model<UserDocument>) { }
 
-    async create(CreateUserDto: CreateUserDto): Promise<UserEntity> {
-        const createdUser = new this.UserModel(CreateUserDto);
+    async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+
+        // const createReqBody = plainToInstance(CreateUserDto, createUserDto);
+
+        // await validate(createReqBody);
+
+        const createdUser = new this.UserModel(createUserDto);
         return createdUser.save();
     }
 

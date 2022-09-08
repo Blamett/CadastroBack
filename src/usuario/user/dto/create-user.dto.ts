@@ -1,4 +1,4 @@
-import { IsNotEmpty, ValidateNested } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
 
 class Endereco {
 
@@ -33,6 +33,7 @@ export class CreateUserDto {
     sexo: string;
 
     @IsNotEmpty()
+    @IsDateString()
     dataDeNascimento: Date;
 
     @IsNotEmpty()
