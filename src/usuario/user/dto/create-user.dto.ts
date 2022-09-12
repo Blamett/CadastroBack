@@ -1,39 +1,46 @@
-import { IsNotEmpty, ValidateNested } from "class-validator";
+import { IsDateString, IsEnum, IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
+import { estadoCivil } from "../estadoCivilEnum";
+import { Sexo } from "../sexoEnum";
 
 class Endereco {
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'apelido é obrigatório' })
+    apelido: string;
+
+    @IsNotEmpty({ message: 'cep é obrigatório' })
     cep: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'endereço é obrigatório' })
     endereco: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'número é obrigatório' })
     numero: string;
 
     @IsNotEmpty()
     complemento: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'cidade é obrigatório' })
     cidade: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'estado é obrigatório' })
     estado: string;
 }
 
 export class CreateUserDto {
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'nome é obrigatório' })
     nome: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'sexo é obrigatório' })
+    @IsEnum(Sexo, { message: 'sexo inválido' })
     sexo: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'data de nascimento é obrigatório' })
     dataDeNascimento: Date;
 
-    @IsNotEmpty()
-    estadoCivil: string
+    @IsNotEmpty({ message: 'estado civil é obrigatório' })
+    @IsEnum(estadoCivil, { message: 'estado civil inválido' })
+    estadoCivil: string;
 
     @ValidateNested()
     Endereco: Endereco;

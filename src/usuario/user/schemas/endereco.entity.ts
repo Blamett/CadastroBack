@@ -5,12 +5,15 @@ import { Document } from 'mongoose';
 export class EnderecoEntity {
 
     @Prop({ type: String, required: true })
+    apelido: string;
+
+    @Prop({ type: Number, required: true })
     cep: string;
 
     @Prop({ type: String, required: true })
     endereco: string;
 
-    @Prop({ type: String, required: true })
+    @Prop({ type: Number, required: true })
     numero: string;
 
     @Prop({ type: String })
